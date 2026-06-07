@@ -1,0 +1,69 @@
+.announcement-bar {
+  background: linear-gradient(135deg, #111111, #0a0a0a);
+  border-bottom: 1px solid #1a1a1a;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #aaaaaa;
+  overflow: hidden;
+  position: relative;
+  z-index: 100;
+}
+
+.ann-left,
+.ann-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ann-center {
+  flex: 1;
+  overflow: hidden;
+  margin: 0 24px;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 22s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-track span {
+  display: flex;
+  align-items: center;
+  padding-right: 60px;
+}
+
+.ann-icon {
+  color: #ff3c3c;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.ann-sep {
+  color: #ff3c3c;
+  margin: 0 8px;
+}
+
+.highlight {
+  color: #ff6b00;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .ann-left,
+  .ann-right {
+    display: none;
+  }
+  .ann-center {
+    margin: 0;
+  }
+}

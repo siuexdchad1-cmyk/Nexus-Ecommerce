@@ -1,0 +1,48 @@
+.section-padding {
+  padding: 48px 0;
+}
+
+.scroll-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.scroll-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.scroll-arrow:hover {
+  background: var(--gradient-main);
+  border-color: var(--red);
+  box-shadow: var(--red-glow);
+}
+
+.products-scroll-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.products-scroll-row::-webkit-scrollbar {
+  display: none;
+}
+
+.products-scroll-row .product-card {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
