@@ -1,4 +1,5 @@
 # ⚡ NEXUS STORE — Premium Electronics E-Commerce Store
+https://nexus-ecommerce-beta.vercel.app/
 
 Welcome to **NEXUS STORE**, a modern, high-performance, visually rich electronics e-commerce catalog application built with React, Vite, and GSAP. 
 
