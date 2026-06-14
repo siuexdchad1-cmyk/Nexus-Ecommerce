@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import AdminApp from './admin/AdminApp';
+import { supabase } from './admin/lib/supabase';
+import { products as staticProducts, categories as staticCategories, brands as staticBrands } from './data/products';
 import { CartProvider } from './context/CartContext';
 import AnnouncementBar from './components/AnnouncementBar';
 import Navbar from './components/Navbar';
@@ -121,10 +124,73 @@ const AppLayout = () => {
 };
 
 function App() {
+  const [liveLoaded, setLiveLoaded] = useState(false);
+
+  useEffect(() => {
+    async function fetchLiveProducts() {
+      try {
+        const { data: dbProducts, error } = await supabase
+          .from('products')
+          .select('*, categories(name)')
+          .eq('status', 'active');
+        
+        if (error) {
+          console.warn('Failed to load products from Supabase:', error.message);
+          return;
+        }
+
+        if (dbProducts && dbProducts.length > 0) {
+          const mapped = dbProducts.map(p => ({
+            id: p.id,
+            name: p.name,
+            brand: p.brand || 'Nexus',
+            category: p.categories?.name || 'Uncategorized',
+            price: Number(p.price),
+            originalPrice: p.discount_price ? Number(p.discount_price) : undefined,
+            discount: p.discount_price && p.discount_price > p.price
+              ? Math.round(((p.discount_price - p.price) / p.discount_price) * 100)
+              : undefined,
+            rating: 4.5,
+            reviews: 0,
+            stock: p.stock_quantity,
+            image: p.image_url || 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400',
+            specs: {},
+            features: [],
+            description: p.description || ''
+          }));
+
+          const liveNames = new Set(mapped.map(p => p.name.toLowerCase()));
+          const filteredStatic = staticProducts.filter(p => !liveNames.has(p.name.toLowerCase()));
+
+          // Mutate static data arrays reference
+          staticProducts.length = 0;
+          staticProducts.push(...mapped, ...filteredStatic);
+
+          const uniqueCats = [...new Set(staticProducts.map(p => p.category))];
+          staticCategories.length = 0;
+          staticCategories.push(...uniqueCats);
+
+          const uniqueBrands = [...new Set(staticProducts.map(p => p.brand))];
+          staticBrands.length = 0;
+          staticBrands.push(...uniqueBrands);
+        }
+      } catch (err) {
+        console.error('Failed to merge live products:', err);
+      } finally {
+        setLiveLoaded(true);
+      }
+    }
+
+    fetchLiveProducts();
+  }, []);
+
   return (
     <CartProvider>
       <BrowserRouter>
-        <AppLayout />
+        <Routes>
+          <Route path="/admin/*" element={<AdminApp />} />
+          <Route path="*" element={<AppLayout />} />
+        </Routes>
       </BrowserRouter>
     </CartProvider>
   );

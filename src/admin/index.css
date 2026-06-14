@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-nexus-red: #ff3c3c;
+  --color-nexus-orange: #ff6b00;
+  --color-nexus-dark: #0a0a0a;
+  --color-nexus-card: #111111;
+  --color-nexus-card-hover: #1a1a1a;
+  --color-nexus-border: #222222;
+  --color-nexus-text: #e5e5e5;
+  --color-nexus-muted: #888888;
+  --color-nexus-success: #22c55e;
+  --color-nexus-warning: #f59e0b;
+  --color-nexus-danger: #ef4444;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Custom focus styles */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 60, 60, 0.3);
+}

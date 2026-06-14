@@ -2533,7 +2533,7 @@ export const products = [
 export const categories = [...new Set(products.map(p => p.category))];
 export const brands = [...new Set(products.map(p => p.brand))];
 
-export const getProductById = (id) => products.find(p => p.id === parseInt(id));
+export const getProductById = (id) => products.find(p => String(p.id) === String(id));
 export const getProductsByCategory = (category) => products.filter(p => p.category === category);
 export const getFeaturedProducts = () => products.filter(p => p.badge === 'BEST SELLER' || p.rating >= 4.8).slice(0, 8);
 export const getBestSellers = () => products.filter(p => p.reviews > 1000).sort((a, b) => b.reviews - a.reviews).slice(0, 8);
