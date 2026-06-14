@@ -1,0 +1,85 @@
+/* Admin Panel Styles — Tailwind CSS v4 (utilities only, no preflight reset) */
+@import "tailwindcss/theme";
+@import "tailwindcss/utilities";
+
+@theme {
+  --color-nexus-red: #ff3c3c;
+  --color-nexus-orange: #ff6b00;
+  --color-nexus-dark: #0a0a0a;
+  --color-nexus-card: #111111;
+  --color-nexus-card-hover: #1a1a1a;
+  --color-nexus-border: #222222;
+  --color-nexus-text: #e5e5e5;
+  --color-nexus-muted: #888888;
+  --color-nexus-success: #22c55e;
+  --color-nexus-warning: #f59e0b;
+  --color-nexus-danger: #ef4444;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Scoped Preflight resets for Admin Panel */
+.admin-panel,
+.admin-panel *,
+.admin-panel ::before,
+.admin-panel ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  border-color: #222222;
+}
+
+:where(.admin-panel) :where(table) {
+  border-collapse: collapse;
+  text-indent: 0;
+  border-color: inherit;
+  width: 100%;
+}
+
+:where(.admin-panel) :where(th, td) {
+  text-align: left;
+  vertical-align: middle;
+}
+
+:where(.admin-panel) :where(input, select, textarea, button) {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+:where(.admin-panel) :where(button) {
+  cursor: pointer;
+}
+
+/* Admin-scoped scrollbar */
+.admin-panel ::-webkit-scrollbar { width: 6px; height: 6px; }
+.admin-panel ::-webkit-scrollbar-track { background: #0a0a0a; }
+.admin-panel ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+/* Admin-scoped focus styles */
+.admin-panel input:focus,
+.admin-panel select:focus,
+.admin-panel textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 60, 60, 0.3);
+}
+
+/* Subtle floating background animations */
+@keyframes adminFloat1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+@keyframes adminFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 20px) scale(1.08); }
+  66% { transform: translate(20px, -10px) scale(0.92); }
+}
+
+@keyframes adminFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(15px, -25px) scale(1.1); }
+}
